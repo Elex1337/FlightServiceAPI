@@ -1,4 +1,5 @@
 using FlightServiceAPI.Application;
+using FlightServiceAPI.Extensions;
 using FlightServiceAPI.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,6 +12,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+await app.InitializeDatabaseAsync();
 
 if (app.Environment.IsDevelopment())
 {

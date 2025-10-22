@@ -1,6 +1,7 @@
 using FlightServiceAPI.Application.Common.Interfaces;
 using FlightServiceAPI.Infrastructure.Cache;
 using FlightServiceAPI.Infrastructure.Data;
+using FlightServiceAPI.Infrastructure.Security;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -23,11 +24,15 @@ public static class DependencyInjection
                 connectionString,
                 b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
         
+        services.AddScoped<ApplicationDbContextInitializer>();
+        
         services.AddScoped<IApplicationDbContext>(provider =>
             provider.GetRequiredService<ApplicationDbContext>());
 
         services.AddMemoryCache();
         services.AddScoped<ICacheService, MemoryCacheService>();
+        
+        services.AddScoped<IPasswordHasher, PasswordHasher>();
         
         return services;
     }
