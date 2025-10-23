@@ -11,6 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <PackageReference Include="FluentResults" Version="4.0.0" />
       <PackageReference Include="FluentValidation" Version="11.11.0" />
       <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.11.0" />
       <PackageReference Include="MediatR" Version="13.0.0" />
@@ -18,7 +19,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Common\Dtos\" />
       <Folder Include="Flights\Commands\" />
       <Folder Include="Flights\Handlers\" />
       <Folder Include="Flights\Queries\" />
