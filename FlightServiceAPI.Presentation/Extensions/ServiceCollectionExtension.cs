@@ -1,3 +1,4 @@
+using System.Reflection;
 using FlightServiceAPI.Infrastructure.Data;
 using Microsoft.OpenApi.Models;
 using Serilog;
@@ -29,7 +30,10 @@ public static class ServiceCollectionExtension
                     Email = "your.email@example.com"
                 }
             });
-
+            
+            var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+            options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
+            
             options.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
             {
                 Name = "Authorization",
@@ -37,7 +41,6 @@ public static class ServiceCollectionExtension
                 Scheme = "bearer",
                 BearerFormat = "JWT",
                 In = ParameterLocation.Header,
-                Description = "Введите JWT токен в формате: Bearer {ваш токен}"
             });
 
             options.AddSecurityRequirement(new OpenApiSecurityRequirement
