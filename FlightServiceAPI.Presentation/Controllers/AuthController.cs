@@ -14,7 +14,11 @@ public class AuthController : BaseController
     {
         _mediator = mediator;
     }
-
+    /// <summary>
+    /// Авторризация
+    /// </summary>
+    /// <param name="command"></param>
+    /// <returns></returns>
     [HttpPost("login")]
     public async Task<IActionResult> Login([FromBody] LoginCommand command)
     {

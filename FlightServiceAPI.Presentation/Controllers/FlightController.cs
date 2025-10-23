@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace FlightServiceAPI.Controllers;
+/// <summary>
+/// Контроллер для управления рейсами
+/// </summary>
 [ApiController]
 [Route("api/flights")]
 public class FlightController : BaseController
@@ -15,8 +18,12 @@ public class FlightController : BaseController
     {
         _mediator = mediator;
     }
-
-    [HttpPost("create")]
+    /// <summary>
+    /// Создание нового рейса
+    /// </summary>
+    /// <param name="command"></param>
+    /// <returns></returns>
+    [HttpPost]
     [Authorize(Roles = "Moderator")]
     public async Task<IActionResult> CreateFlight([FromBody] CreateFlightCommand command)
     {
@@ -27,8 +34,12 @@ public class FlightController : BaseController
         }
         return Created("flight", result.Value);
     }
-    
-    [HttpPatch("update-status")]
+    /// <summary>
+    /// Смена статуса рейса
+    /// </summary>
+    /// <param name="command"></param>
+    /// <returns></returns>
+    [HttpPatch("status")]
     [Authorize(Roles = "Moderator")]
     public async Task<IActionResult> ChangeFlightStatus([FromBody] ChangeFlightStatusCommand command)
     {
@@ -41,7 +52,11 @@ public class FlightController : BaseController
         
         return Ok(result.Value);
     }
-
+    /// <summary>
+    /// Получение списка рейсов
+    /// </summary>
+    /// <param name="query"></param>
+    /// <returns></returns>
     [HttpGet]
     [Authorize]
     public async Task<IActionResult> GetFlights([FromQuery] GetFlightsQuery query)
