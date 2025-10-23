@@ -22,19 +22,25 @@ public static class DependencyInjection
         {
             throw new InvalidOperationException("Connection string 'DatabaseConnection' not found.");
         }
-        
-        services.AddDbContext<ApplicationDbContext>(options =>
+        services.AddHttpContextAccessor();
+
+        services.AddScoped<AuditableEntityInterceptor>();
+
+        services.AddDbContext<ApplicationDbContext>((sp, options) =>
+        {
+            var interceptor = sp.GetRequiredService<AuditableEntityInterceptor>();
             options.UseNpgsql(
                 connectionString,
-                b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
-        
+                b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)).AddInterceptors(interceptor);
+        });
+            
         services.AddScoped<ApplicationDbContextInitializer>();
         
         services.AddScoped<IApplicationDbContext>(provider =>
             provider.GetRequiredService<ApplicationDbContext>());
 
         services.AddMemoryCache();
-        services.AddScoped<ICacheService, MemoryCacheService>();
+        services.AddSingleton<ICacheService, MemoryCacheService>();
         
         services.AddScoped<IPasswordHasher, PasswordHasher>();
         
