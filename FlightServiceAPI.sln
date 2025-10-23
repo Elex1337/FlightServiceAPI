@@ -8,6 +8,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightServiceAPI.Applicatio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightServiceAPI.Infrastructure", "FlightServiceAPI.Infrastructure\FlightServiceAPI.Infrastructure.csproj", "{B872B78D-0C71-4C64-B2D7-7686ABAA4DA2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlightServiceAPI.Tests", "FlightServiceAPI.Tests\FlightServiceAPI.Tests.csproj", "{3D65A655-365F-4BC5-A7CA-C37E2581331B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -30,5 +32,9 @@ Global
 		{B872B78D-0C71-4C64-B2D7-7686ABAA4DA2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B872B78D-0C71-4C64-B2D7-7686ABAA4DA2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B872B78D-0C71-4C64-B2D7-7686ABAA4DA2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3D65A655-365F-4BC5-A7CA-C37E2581331B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3D65A655-365F-4BC5-A7CA-C37E2581331B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3D65A655-365F-4BC5-A7CA-C37E2581331B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3D65A655-365F-4BC5-A7CA-C37E2581331B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

@@ -18,10 +18,4 @@
       <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.36" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Flights\Commands\" />
-      <Folder Include="Flights\Handlers\" />
-      <Folder Include="Flights\Queries\" />
-    </ItemGroup>
-
 </Project>
