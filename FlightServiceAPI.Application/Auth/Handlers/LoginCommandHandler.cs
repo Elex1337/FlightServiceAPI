@@ -22,7 +22,10 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, Result<LoginRes
 
     public async Task<Result<LoginResponse>> Handle(LoginCommand request, CancellationToken cancellationToken)
     {
-        var user =  await _context.Users.AsNoTracking().FirstOrDefaultAsync(x => x.Username == request.Username, cancellationToken: cancellationToken);
+        var user =  await _context.Users
+            .Include(x => x.Role)
+            .AsNoTracking()
+            .FirstOrDefaultAsync(x => x.Username == request.Username, cancellationToken: cancellationToken);
         
         if (user is null)
         {
