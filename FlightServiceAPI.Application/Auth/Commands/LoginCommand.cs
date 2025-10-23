@@ -1,4 +1,5 @@
 using FlightServiceAPI.Application.Common.Dtos;
+using FlightServiceAPI.Application.Common.Dtos.Auth;
 using FluentResults;
 using MediatR;
 

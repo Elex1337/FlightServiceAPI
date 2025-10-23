@@ -1,5 +1,6 @@
 using FlightServiceAPI.Application.Auth.Commands;
 using FlightServiceAPI.Application.Common.Dtos;
+using FlightServiceAPI.Application.Common.Dtos.Auth;
 using FlightServiceAPI.Application.Common.Interfaces;
 using FluentResults;
 using MediatR;
@@ -42,9 +43,7 @@ public class LoginCommandHandler : IRequestHandler<LoginCommand, Result<LoginRes
         var token = _jwtTokenGenerator.GenerateToken(user);
         
         var response = new LoginResponse(
-            token,
-            user.Username,
-            user?.Role?.Code ?? "User"
+            token
         );
         
         return Result.Ok(response);
