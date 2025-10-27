@@ -43,10 +43,6 @@ public class CreateFlightCommandHandlerTests
             .Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(1);
 
-        _cacheMock
-            .Setup(x => x.RemoveAsync("flights", It.IsAny<CancellationToken>()))
-            .Returns(ValueTask.CompletedTask);
-
         var command = new CreateFlightCommand(
             "Almaty",
             "Astana",

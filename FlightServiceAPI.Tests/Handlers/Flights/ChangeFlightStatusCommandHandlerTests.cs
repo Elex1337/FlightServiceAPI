@@ -39,17 +39,13 @@ public class ChangeFlightStatusCommandHandlerTests
         };
 
         _contextMock
-            .Setup(x => x.Flights.FindAsync(1, It.IsAny<CancellationToken>()))
+            .Setup(x => x.Flights.FindAsync(1))
             .ReturnsAsync(flight);
 
         _contextMock
             .Setup(x => x.SaveChangesAsync(It.IsAny<CancellationToken>()))
             .ReturnsAsync(1);
-
-        _cacheMock
-            .Setup(x => x.RemoveAsync("flights", It.IsAny<CancellationToken>()))
-            .Returns(ValueTask.CompletedTask);
-
+        
         var command = new ChangeFlightStatusCommand(1, Status.Delayed);
 
         var result = await _handler.Handle(command, CancellationToken.None);
