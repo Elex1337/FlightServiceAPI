@@ -42,7 +42,30 @@ public class CreateFlightCommandHandler : IRequestHandler<CreateFlightCommand, R
             flight.Arrival,
             flight.Status
         );
-
+        await AddFlightToCache(response, cancellationToken);
         return Result.Ok(response);
+    }
+    private async Task AddFlightToCache(CreateFlightResponse newFlight, CancellationToken cancellationToken)
+    {
+        const string cacheKey = "flights";
+        var flights = await _cache.GetAsync<List<GetFlightsResponse>>(cacheKey, cancellationToken);
+        
+        if (flights != null)
+        {
+            var flightResponse = new GetFlightsResponse(
+                newFlight.Id,
+                newFlight.Origin,
+                newFlight.Destination,
+                newFlight.Departure,
+                newFlight.Arrival,
+                newFlight.Status
+            );
+            
+            flights.Add(flightResponse);
+            
+            flights = flights.OrderBy(f => f.Arrival).ToList();
+            
+            await _cache.SetAsync(cacheKey, flights, TimeSpan.FromMinutes(10), cancellationToken);
+        }
     }
 }
