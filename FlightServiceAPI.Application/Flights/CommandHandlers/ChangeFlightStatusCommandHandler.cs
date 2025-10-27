@@ -19,7 +19,7 @@ public class ChangeFlightStatusCommandHandler :  IRequestHandler<ChangeFlightSta
 
     public async Task<Result<ChangeFlightStatusResponse>> Handle(ChangeFlightStatusCommand request, CancellationToken cancellationToken)
     {
-        var flight = await _context.Flights.FindAsync(request.Id, cancellationToken);
+        var flight = await _context.Flights.FindAsync(request.Id);
         if (flight is null)
         {
             return Result.Fail<ChangeFlightStatusResponse>("Flight not found");
